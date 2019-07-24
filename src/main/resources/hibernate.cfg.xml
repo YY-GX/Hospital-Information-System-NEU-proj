@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="connection.url">jdbc:mysql://localhost:3306/backup_b</property>
+    <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+    <mapping class="com.yygx.work.Entity.ChargeDetailEntity"/>
+    <mapping class="com.yygx.work.Entity.ChinMedicalDetailEntity"/>
+    <mapping class="com.yygx.work.Entity.ChinMedicalTempEntity"/>
+    <mapping class="com.yygx.work.Entity.ChinMedicalTempDetailEntity"/>
+    <mapping class="com.yygx.work.Entity.DayComputeEntity"/>
+    <mapping class="com.yygx.work.Entity.DepartmentEntity"/>
+    <mapping class="com.yygx.work.Entity.DiseaseEntity"/>
+    <mapping class="com.yygx.work.Entity.DiseaseClassificationEntity"/>
+    <mapping class="com.yygx.work.Entity.HerbMedicalEntity"/>
+    <mapping class="com.yygx.work.Entity.InvoiceEntity"/>
+    <mapping class="com.yygx.work.Entity.MedicalEntity"/>
+    <mapping class="com.yygx.work.Entity.MedicalHomeEntity"/>
+    <mapping class="com.yygx.work.Entity.MedicalTechDocEntity"/>
+    <mapping class="com.yygx.work.Entity.MedicalTechTempEntity"/>
+    <mapping class="com.yygx.work.Entity.MedicineListInfoEntity"/>
+    <mapping class="com.yygx.work.Entity.NonMedicineInfoEntity"/>
+    <mapping class="com.yygx.work.Entity.NumberEntity"/>
+    <mapping class="com.yygx.work.Entity.OutcomeEntity"/>
+    <mapping class="com.yygx.work.Entity.OutdoctorEntity"/>
+    <mapping class="com.yygx.work.Entity.ProgramDetailEntity"/>
+    <mapping class="com.yygx.work.Entity.ProgramListEntity"/>
+    <mapping class="com.yygx.work.Entity.ProgramTempDetailEntity"/>
+    <mapping class="com.yygx.work.Entity.RegisLevelEntity"/>
+    <mapping class="com.yygx.work.Entity.RegistrationEntity"/>
+    <mapping class="com.yygx.work.Entity.RegistrationTollerEntity"/>
+    <mapping class="com.yygx.work.Entity.ScheduleInfoEntity"/>
+    <mapping class="com.yygx.work.Entity.ScheduleRuleEntity"/>
+    <mapping class="com.yygx.work.Entity.TimeToCodeEntity"/>
+    <mapping class="com.yygx.work.Entity.WesMedicineEntity"/>
+    <mapping class="com.yygx.work.Entity.WesMedicineDetailEntity"/>
+    <mapping class="com.yygx.work.Entity.WesMedicineTempEntity"/>
+    <mapping class="com.yygx.work.Entity.WesMedicineTempDetailEntity"/>
+    <!-- <property name="connection.username"/> -->
+    <!-- <property name="connection.password"/> -->
+
+    <!-- DB schema will be updated if needed -->
+    <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
+  </session-factory>
+</hibernate-configuration>
