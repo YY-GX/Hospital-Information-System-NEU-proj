@@ -2,12 +2,14 @@ package com.yygx.work.Service.Impl;
 
 import com.yygx.work.Entity.WesMedicineEntity;
 import com.yygx.work.Repository.MedicineListInfoRepository;
+import com.yygx.work.Repository.WesMedicineDetailRepository;
 import com.yygx.work.Repository.WesMedicineRepository;
 import com.yygx.work.Repository.WesMedicineTempRepository;
 import com.yygx.work.Service.WesMedicineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.HashMap;
 
 @Service
@@ -18,6 +20,8 @@ public class WesMedicineServiceImpl implements WesMedicineService {
     MedicineListInfoRepository medicineListInfoRepository;
     @Autowired
     WesMedicineTempRepository wesMedicineTempRepository;
+    @Autowired
+    WesMedicineDetailRepository wesMedicineDetailRepository;
 
     public HashMap<String, Object> initial(HashMap<String, String> regisId) {
         int id = Integer.parseInt(regisId.get("regisId"));
@@ -39,5 +43,20 @@ public class WesMedicineServiceImpl implements WesMedicineService {
         int wesMedicineId = wesMedicineRepository.findFirstByOrderByWesMedicineIdDesc().getWesMedicineId();
         hashMap.put("medicineId", wesMedicineId + "");
         return hashMap;
+    }
+
+    @Transactional
+    public String deleteMedicine(HashMap<String, String> medicineId){
+        int id = Integer.parseInt(medicineId.get("medicineId"));
+        wesMedicineRepository.deleteById(id);
+        wesMedicineDetailRepository.deleteAllByWesMedicineId(id);
+        return "success";
+    }
+
+    @Transactional
+    public String start(HashMap<String, String> medicineId) {
+        int id = Integer.parseInt(medicineId.get("medicineId"));
+        wesMedicineRepository.changeState(id);
+        return "success";
     }
 }

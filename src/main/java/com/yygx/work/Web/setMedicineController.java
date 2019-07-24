@@ -1,12 +1,10 @@
 package com.yygx.work.Web;
 
+import com.yygx.work.Entity.WesMedicineTempEntity;
 import com.yygx.work.Service.WesMedicineDetailService;
 import com.yygx.work.Service.WesMedicineService;
-import com.yygx.work.Service.WesMedicineTempDetailService;
 import com.yygx.work.Service.WesMedicineTempService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
@@ -19,8 +17,6 @@ public class setMedicineController {
     WesMedicineDetailService wesMedicineDetailService;
     @Resource
     WesMedicineTempService wesMedicineTempService;
-    @Resource
-    WesMedicineTempDetailService wesMedicineTempDetailService;
 
     @GetMapping("/setMedicine/initial")
     public HashMap<String, Object> initial(@RequestParam HashMap<String, String> regisId) {
@@ -41,4 +37,25 @@ public class setMedicineController {
     public HashMap<String, String> addMedicine(@RequestParam HashMap<String, String> regisId) {
         return wesMedicineService.addMedicine(regisId);
     }
+
+    @GetMapping("/sendMedicine/deleteMedicine")
+    public String deleteMedicine(@RequestParam HashMap<String, String> medicineId) {
+        return wesMedicineService.deleteMedicine(medicineId);
+    }
+
+    @GetMapping("/sendMedicine/start")
+    public String start(@RequestParam HashMap<String, String> medicineId) {
+        return wesMedicineService.start(medicineId);
+    }
+
+    @GetMapping("/sendMedicine/useTemp")
+    public String useTemp(@RequestParam HashMap<String, String> ids) {
+        return wesMedicineDetailService.useTemp(ids);
+    }
+
+    @PostMapping("/sendMedicine/addTemp")
+    public HashMap<String, WesMedicineTempEntity> addTemp(@RequestBody HashMap<String, Object> temp) {
+        return wesMedicineTempService.addTemp(temp);
+    }
+
 }
