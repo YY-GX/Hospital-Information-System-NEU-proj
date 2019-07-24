@@ -34,4 +34,7 @@ public interface RegistrationRepository extends JpaRepository<RegistrationEntity
     @Query(value = "SELECT regis_id, medical_num, patient_id, name, sex, age, age_type FROM registration JOIN medical USING (medical_num) WHERE outdoctor_id = ?1 AND time = ?2 AND regis_state = 3", nativeQuery = true)
     @Modifying
     public List<Object> joinRegistrationMedicalDone(int outdoctorId, String time);
+
+    @Query(value = "SELECT outdoctor_id FROM registration WHERE regis_id = ?1", nativeQuery = true)
+    public String findOutdoctorId(int regisId);
 }

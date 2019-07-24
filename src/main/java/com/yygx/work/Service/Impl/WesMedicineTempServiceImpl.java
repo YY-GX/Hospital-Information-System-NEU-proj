@@ -27,7 +27,7 @@ public class WesMedicineTempServiceImpl implements WesMedicineTempService {
         String name = (String)newTemp.get("name");
 
         Date date = new Date();//此时date为当前的时间
-        SimpleDateFormat dateFormat_min = new SimpleDateFormat("YYYY/MM/dd HH:mm:ss");
+        SimpleDateFormat dateFormat_min = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
         String regisAccTime =  dateFormat_min.format(date);
         WesMedicineTempEntity wesMedicineTempEntity = new WesMedicineTempEntity(range, regisAccTime, outdoctorId, name);
         wesMedicineTempRepository.save(wesMedicineTempEntity);

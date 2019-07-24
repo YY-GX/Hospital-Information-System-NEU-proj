@@ -59,4 +59,11 @@ public class WesMedicineServiceImpl implements WesMedicineService {
         wesMedicineRepository.changeState(id);
         return "success";
     }
+
+    @Transactional
+    public String changeState(HashMap<String, String> medicineId) {
+        int id = Integer.parseInt(medicineId.get("medicineId"));
+        wesMedicineRepository.updateState(id);
+        return "success";
+    }
 }

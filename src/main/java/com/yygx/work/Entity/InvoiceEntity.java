@@ -14,6 +14,17 @@ public class InvoiceEntity {
     private int regisId;
     private int refundInvoiceNum;
 
+    public InvoiceEntity(double money, String invoiceState, String chargeTime, int registrationTollerId, int regisId, int refundInvoiceNum) {
+        this.money = money;
+        this.invoiceState = invoiceState;
+        this.chargeTime = chargeTime;
+        this.registrationTollerId = registrationTollerId;
+        this.regisId = regisId;
+        this.refundInvoiceNum = refundInvoiceNum;
+    }
+
+    public InvoiceEntity() {}
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "invoice_num")

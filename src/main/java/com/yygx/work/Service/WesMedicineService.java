@@ -10,4 +10,6 @@ public interface WesMedicineService {
     public String deleteMedicine(HashMap<String, String> medicineId);
 
     public String start(HashMap<String, String> medicineId);
+
+    public String changeState(HashMap<String, String> medicineId);
 }

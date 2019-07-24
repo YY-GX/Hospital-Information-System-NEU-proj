@@ -1,10 +1,7 @@
 package com.yygx.work.Service.Impl;
 
 import com.yygx.work.Entity.RegistrationEntity;
-import com.yygx.work.Repository.ChargeDetailRepository;
-import com.yygx.work.Repository.DiseaseRepository;
-import com.yygx.work.Repository.RegistrationRepository;
-import com.yygx.work.Repository.TimeToCodeRepository;
+import com.yygx.work.Repository.*;
 import com.yygx.work.Service.MedicalService;
 import com.yygx.work.Service.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +28,8 @@ public class RegistrationServiceImpl implements RegistrationService {
     TimeToCodeRepository timeToCodeRepository;
     @Autowired
     DiseaseRepository diseaseRepository;
+    @Autowired
+    WesMedicineRepository wesMedicineRepository;
 
     @Resource
     MedicalService medicalService;
@@ -106,6 +105,60 @@ public class RegistrationServiceImpl implements RegistrationService {
         hashMap.put("todo", registrationRepository.joinRegistrationMedicalTodo(outdoctorId, time));
         hashMap.put("done", registrationRepository.joinRegistrationMedicalDone(outdoctorId, time));
         hashMap.put("diseaseList", diseaseRepository.findAll());
+        return hashMap;
+    }
+
+    public HashMap<String, Object> display(HashMap<String, String> medicalId) {
+//        获取病历id
+        int id = Integer.parseInt(medicalId.get("medicalId"));
+        List<RegistrationEntity> registrationEntities = registrationRepository.findAllByMedicalNum(id);
+        Integer chosenRegisId = 0;
+        int medicineId = 0;
+        for (RegistrationEntity r: registrationEntities
+             ) {
+            int regisId = r.getRegisId();
+//            找到对应的那个regisId
+            chosenRegisId = chargeDetailRepository.findNotPay(regisId).get(0);
+            if (chosenRegisId == null) {
+                continue;
+            }
+            System.out.println(chosenRegisId);
+//            regisId对应的处方id
+            medicineId = wesMedicineRepository.findByRegisId(chosenRegisId).getWesMedicineId();
+        }
+        System.out.println(medicineId);
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("feeItems", wesMedicineRepository.joinRegistrationMedicine(medicineId));
+        hashMap.put("medicineId", medicineId);
+        hashMap.put("chosenRegisId", chosenRegisId);
+        return hashMap;
+    }
+
+    public HashMap<String, Object> sendMedicine(HashMap<String, String> medicalId) {
+        //        获取病历id
+        int id = Integer.parseInt(medicalId.get("medicalId"));
+        List<RegistrationEntity> registrationEntities = registrationRepository.findAllByMedicalNum(id);
+        Integer chosenRegisId = 0;
+        int medicineId = 0;
+        for (RegistrationEntity r: registrationEntities
+        ) {
+            int regisId = r.getRegisId();
+//            找到对应的那个regisId
+            chosenRegisId = chargeDetailRepository.findNotPay(regisId).get(0);
+            if (chosenRegisId == null) {
+                continue;
+            }
+            System.out.println(chosenRegisId);
+//            regisId对应的处方id
+            medicineId = wesMedicineRepository.findByRegisId(chosenRegisId).getWesMedicineId();
+        }
+        String outdoctorId = registrationRepository.findOutdoctorId(chosenRegisId);
+        System.out.println(medicineId);
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("feeItems", wesMedicineRepository.joinRegistrationMedicine(medicineId));
+        hashMap.put("outdoctorId", outdoctorId);
+        hashMap.put("medicineId", medicineId);
+        hashMap.put("chosenRegisId", chosenRegisId);
         return hashMap;
     }
 }

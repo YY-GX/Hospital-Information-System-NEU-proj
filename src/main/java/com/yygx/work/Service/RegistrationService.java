@@ -13,4 +13,8 @@ public interface RegistrationService {
     public HashMap<String, String> refund(int regisId);
 
     public HashMap<String, Object> todoDonePatientDisease();
+
+    public HashMap<String, Object> display(HashMap<String, String> medicalId);
+
+    public HashMap<String, Object> sendMedicine(HashMap<String, String> medicalId);
 }
