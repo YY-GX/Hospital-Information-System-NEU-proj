@@ -1,6 +1,6 @@
 # Hospital Information System (HIS) based on NeuSoft Cloud
 ## Introduction 
-The project done in 2019-06 in NEU(China) advised by Linying Jiang. 
+The project was done in 2019-06 in NEU(China) advised by Linying Jiang. 
 This project is a part of the `Hospital Information System (HIS)`. Aimed to realize 6 main function models.
 
 ## Technique List
